@@ -66,27 +66,7 @@ export default function Navbar() {
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          <Button
-            as="a"
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href="/"
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Register Now
-          </Button>
-        </Stack>
+        <RegisterBtn />
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -94,6 +74,38 @@ export default function Navbar() {
       </Collapse>
     </Box>
   );
+}
+
+interface RegisterBtnProps {
+  size?: string
+  fontSize?: string
+}
+
+export const RegisterBtn = ({ size = 'sm', fontSize = 'sm' }: RegisterBtnProps) => {
+  return (
+    <Stack
+      justify={"flex-end"}
+      flex={{ base: 1, md: 0 }}
+      direction={"row"}
+      spacing={6}
+    >
+      <Button
+        as="a"
+        size={size}
+        // display={{ md: "inline-flex" }}
+        fontSize={fontSize}
+        fontWeight={600}
+        color={"white"}
+        bg={"pink.400"}
+        href="/"
+        _hover={{
+          bg: "pink.300",
+        }}
+      >
+        Register Now
+      </Button>
+    </Stack>
+  )
 }
 
 const DesktopNav = () => {
