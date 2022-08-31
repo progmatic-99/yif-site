@@ -1,12 +1,19 @@
-import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon } from "@chakra-ui/react";
+import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { ImLocation2 } from 'react-icons/im'
 import { BsFillCalendarCheckFill } from 'react-icons/bs'
 import { TiTick } from 'react-icons/ti'
 import { RegisterBtn } from "@src/components/layout/navbar";
+import { useRef } from "react";
+import { useInViewport } from "react-in-viewport";
+import { SiDiscover } from 'react-icons/si'
+import { MdLeaderboard } from 'react-icons/md'
+import { FaBuromobelexperte } from 'react-icons/fa'
+import { IoGitNetworkSharp } from 'react-icons/io5'
+import Link from "next/link";
 
 const HIGHLIGHTS = {
-  'PARTICIPANTS': '2K+',
+  'PARTICIPANTS': '3K+',
   'SPEAKERS': '25+',
   'EXHIBITIONS & PARTNERS': '20+'
 }
@@ -18,18 +25,38 @@ const POINTS = ['Footfall of 2,000 + participants', '2️5 & counting - Indian s
   'AIC (Academia-Industry Connect) followed by awards night'
 ]
 
+/*
+type IconName = 'SiDiscover' | 'MdLeaderboard' | 'FaBuromobelexperte' | 'IoGitNetworkSharp';
+
+const PTS: Record<IconName, string> = {
+  SiDiscover: 'Unique Speakers',
+  MdLeaderboard: 'Leadership Path',
+  FaBuromobelexperte: 'Expert Advice',
+  IoGitNetworkSharp: 'Networking'
+}
+
+const LEARNING_POINTS = {
+  'Unique Speakers': 'SiDiscover',
+  'Leadership Path': 'MdLeaderboard',
+  'Expert Advice': 'FaBuromobelexperte',
+  'Networking': 'IoGitNetworkSharp'
+}
+*/
 const Home: NextPage = () => {
   return (
     <main>
+      <Box w='full' h='400px'>
+        <Image src='/yif-2.png' w='100%' h='100%' alt='YIF banner' />
+      </Box>
       <VStack spacing={4} m={8}>
-        <Heading as="h4" fontSize={{ lg: '3xl', md: '2xl', sm: 'xl' }}>
+        {/* <Heading as="h4" fontSize={{ lg: '3xl', md: '2xl', sm: 'xl' }} color='pink.100'>
           Building India’s Tomorrow
-        </Heading>
+        </Heading> */}
         <Heading as="h1" fontSize={{ lg: '6xl', md: '4xl', base: '2xl' }}>Youth Innovation Forum 2022</Heading>
-        <Heading as="h4" fontSize={{ lg: '3xl', md: '2xl', sm: 'xl' }}>
+        {/* <Heading as="h4" fontSize={{ lg: '3xl', md: '2xl', sm: 'xl' }} color='pink.100'>
           Decentralizing India
-        </Heading>
-        <HStack bgColor="whiteAlpha.300" spacing="6">
+        </Heading> */}
+        <HStack bgColor="whiteAlpha.300" spacing="6" p='2' borderRadius='sm'>
           <HStack>
             <ImLocation2 />
             <Text>
@@ -81,8 +108,107 @@ const Home: NextPage = () => {
           }
         </List>
       </VStack>
+      <Speakers />
+      <VStack m='8'>
+        <Heading>Who should attend??</Heading>
+      </VStack>
+      <VStack m='16' spacing='14'>
+        <Heading>What you will learn</Heading>
+        <Learnings />
+      </VStack>
+      <Flex align='center' direction='column' justify='center' mt='24' pt='16' bgColor='white' color='black' w='full'>
+        <Heading>Tickets</Heading>
+        {/* <Box borderRadius='xl' bgColor='pink.300' p='4'>
+          <HStack>
+            <Heading>Buy your tickets </Heading>
+            <Link href="https://rzp.io/l/YIF22" passHref>
+              <a target='_blank' rel="noopener">here.</a>
+            </Link>
+          </HStack>
+        </Box> */}
+      </Flex>
     </main >
   );
 };
+
+const Learnings = () => {
+  const ref = useRef(null);
+  const { enterCount } = useInViewport(
+    ref,
+    { rootMargin: "-300px" },
+    { disconnectOnLeave: false },
+    {}
+  );
+
+  return (
+    <SimpleGrid columns={{ sm: 2, md: 4 }} spacing='6'>
+      <Box p='6' ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' color='white' bgColor='pink.300'>
+        <VStack>
+          <Icon fontSize='6xl' as={SiDiscover} />
+          <Text fontSize='xl' fontWeight='bold' color='white' noOfLines={2}>Unique Speakers</Text>
+        </VStack>
+      </Box>
+      <Box p='6' ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' color='white' bgColor='pink.300'>
+        <VStack>
+          <Icon as={MdLeaderboard} fontSize='6xl' />
+          <Text fontSize='xl' fontWeight='bold' color='white' noOfLines={2}>Leadership Path</Text>
+        </VStack>
+      </Box>
+      <Box p='6' ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' color='white' bgColor='pink.300'>
+        <VStack>
+          <Icon as={FaBuromobelexperte} fontSize='6xl' />
+          <Text fontSize='xl' fontWeight='bold' color='white' noOfLines={2}>Expert Advice</Text>
+        </VStack>
+      </Box>
+      <Box p='6' ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' color='white' bgColor='pink.300'>
+        <VStack>
+          <Icon as={IoGitNetworkSharp} fontSize='6xl' />
+          <Text fontSize='xl' fontWeight='bold' color='white' noOfLines={2}>Networking</Text>
+        </VStack>
+      </Box>
+    </SimpleGrid>
+  )
+}
+
+const Speakers = () => {
+  const ref = useRef(null);
+  const { enterCount } = useInViewport(
+    ref,
+    { rootMargin: "-300px" },
+    { disconnectOnLeave: false },
+    {}
+  );
+
+  return (
+    <VStack bgColor='white' p='16' color='black' spacing='6'>
+      <Heading as='h1' fontSize='3xl'>Speakers</Heading>
+      <SimpleGrid columns={{ sm: 2, md: 3 }} spacing='6' m='4'>
+        {
+          Object.entries(HIGHLIGHTS).map(([key, value], index) => {
+            return (
+              <ScaleFade
+                initialScale={0.9}
+                in={enterCount > 0}
+                key={index}
+                whileHover={{ scale: 1.1 }}
+              >
+                <Box ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                  <Image src="https://bit.ly/dan-abramov" fallbackSrc="/utb-dark.png" alt="Dummy image" />
+                  <Box p='6'>
+                    <VStack>
+                      <Text fontWeight='bold'>Aman Gupta</Text>
+                      <Text>CoFounder</Text>
+                      <Text color='pink.400'>boat</Text>
+                    </VStack>
+                  </Box>
+                </Box>
+              </ScaleFade>
+            )
+          })
+        }
+      </SimpleGrid>
+    </VStack>
+  )
+}
 
 export default Home;
