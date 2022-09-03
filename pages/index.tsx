@@ -25,6 +25,16 @@ const POINTS = ['Footfall of 2,000 + participants', '2️5 & counting - Indian s
   'AIC (Academia-Industry Connect) followed by awards night'
 ]
 
+const ABOUTUS = [
+  'YIF is a youth driven techno fest - hosting the youth, incubation centers, new businesses, financial backers and stakeholders - all on 1 platform. This is a stepping stone to India’s 2030 - Web 3, Industry 4.0, Blockchain, 5G, and IoT and we are here to talk about that by creating the next-generation movement ',
+  'A platform to pitch and perform on the stage, raise the voice and share the viewpoint.'
+]
+
+const POINTERS = ['AIC: Renowned brands showcasing their products and services and promoting innovation and growth',
+   'Conference: Prominent speakers delivering useful insights to 3000+ participants',
+   'Awards: Witness magnificent awards night'
+]
+
 /*
 type IconName = 'SiDiscover' | 'MdLeaderboard' | 'FaBuromobelexperte' | 'IoGitNetworkSharp';
 
@@ -98,6 +108,34 @@ const Home: NextPage = () => {
         <List spacing={3}>
           {
             POINTS.map((point, index) => {
+              return (
+                <ListItem key={index} fontSize='lg'>
+                  <ListIcon as={TiTick} color='pink.400' />
+                  {point}
+                </ListItem>
+              )
+            })
+          }
+        </List>
+      </VStack>
+      <VStack align='center' m="10">
+        <List spacing={3}>
+          {
+            ABOUTUS.map((point, index) => {
+              return (
+                <ListItem key={index} fontSize='lg'>
+                  <ListIcon as={TiTick} color='pink.400' />
+                  {point}
+                </ListItem>
+              )
+            })
+          }
+        </List>
+      </VStack>
+      <VStack align='center' m="12">
+        <List spacing={5}>
+          {
+            POINTERS.map((point, index) => {
               return (
                 <ListItem key={index} fontSize='lg'>
                   <ListIcon as={TiTick} color='pink.400' />
