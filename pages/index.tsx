@@ -1,4 +1,4 @@
-import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon } from "@chakra-ui/react";
+import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon, Center, Stack } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { ImLocation2 } from 'react-icons/im'
 import { BsFillCalendarCheckFill } from 'react-icons/bs'
@@ -18,22 +18,30 @@ const HIGHLIGHTS = {
   'EXHIBITIONS & PARTNERS': '20+'
 }
 
-const POINTS = ['Footfall of 2,000 + participants', '2️5 & counting - Indian speakers, celebrities, and influencers',
-  '2️0 + Corporate exhibitions & partners',
+const POINTS = ['Footfall of 3,000+ participants', '2️5& counting - Indian speakers, celebrities, and influencers',
+  '2️5+ Corporate exhibitions & partners',
   'Keynote speeches by representatives from the Ministry Of Gujarat and high-level officials. ',
   'Delegates from over 20+ states & 10+ countries',
   'AIC (Academia-Industry Connect) followed by awards night'
 ]
 
 const ABOUTUS = [
-  'YIF is a youth driven techno fest - hosting the youth, incubation centers, new businesses, financial backers and stakeholders - all on 1 platform. This is a stepping stone to India’s 2030 - Web 3, Industry 4.0, Blockchain, 5G, and IoT and we are here to talk about that by creating the next-generation movement ',
+  'YIF is a youth driven techno fest - hosting the youth, incubation centers, new businesses, financial backers and stakeholders - all on 1 platform.',
+  'This is a stepping stone to India’s 2030 - Web 3, Industry 4.0, Blockchain, 5G, and IoT.',
+  'We are here to talk about that by creating the next-generation movement.',
   'A platform to pitch and perform on the stage, raise the voice and share the viewpoint.'
 ]
 
-const POINTERS = ['AIC: Renowned brands showcasing their products and services and promoting innovation and growth',
-   'Conference: Prominent speakers delivering useful insights to 3000+ participants',
-   'Awards: Witness magnificent awards night'
-]
+const CARDS = {
+  'AIC': ['Renowned brands showcasing their products & services, and promoting innovation & growth.', '/expo.jpeg'],
+  'Conference': ['Prominent speakers delivering useful insights to 3000+ participants.', 'confer.jpeg'],
+  'Awards': ['Witness magnificent award nights.', '/awards.jpeg']
+}
+
+// const POINTERS = ['AIC: Renowned brands showcasing their products and services and promoting innovation and growth',
+//    'Conference: Prominent speakers delivering useful insights to 3000+ participants',
+//    'Awards: Witness magnificent awards night'
+// ]
 
 /*
 type IconName = 'SiDiscover' | 'MdLeaderboard' | 'FaBuromobelexperte' | 'IoGitNetworkSharp';
@@ -55,7 +63,7 @@ const LEARNING_POINTS = {
 const Home: NextPage = () => {
   return (
     <main>
-      <Box w='full' h='400px'>
+      <Box w='full' h='300px'>
         <Image src='/yif-2.png' w='100%' h='100%' alt='YIF banner' />
       </Box>
       <VStack spacing={4} m={8}>
@@ -105,7 +113,7 @@ const Home: NextPage = () => {
         </SimpleGrid>
       </Flex>
       <VStack align='center' m="8">
-        <List spacing={3}>
+        {/* <List spacing={3}>
           {
             POINTS.map((point, index) => {
               return (
@@ -116,54 +124,66 @@ const Home: NextPage = () => {
               )
             })
           }
-        </List>
+        </List> */}
       </VStack>
-      <VStack align='center' m="10">
-        <List spacing={3}>
+      <Box bgColor='white' m='12' borderRadius='lg' p='12'>
+        <HStack p="8" spacing='24' align='space-between'>
+          <Heading color='gray.800'>About the Summit</Heading>
+          <VStack align='flex-end'>
+            <List spacing={3}>
+              {
+                ABOUTUS.map((point, index) => {
+                  return (
+                    <ListItem key={index} fontSize='lg' color='gray.700'>
+                      <ListIcon as={TiTick} color='pink.400' />
+                      {point}
+                    </ListItem>
+                  )
+                })
+              }
+            </List>
+          </VStack>
+        </HStack>
+        <SimpleGrid columns={{ base: 1, lg: 3 }} spacing='4' m={8}>
           {
-            ABOUTUS.map((point, index) => {
+            Object.entries(CARDS).map(([heading, val], index) => {
               return (
-                <ListItem key={index} fontSize='lg'>
-                  <ListIcon as={TiTick} color='pink.400' />
-                  {point}
-                </ListItem>
+                <Box maxW='sm' key={index} borderWidth='1px' borderRadius='lg' overflow='hidden' borderColor='pink.200'>
+                  <Image src={val[1]} alt={heading} />
+
+                  <Box p='6'>
+                    <Box
+                      mt='1'
+                      fontWeight='semibold'
+                      fontSize='xl'
+                      as='h4'
+                      lineHeight='tight'
+                      noOfLines={1}
+                      color='black'
+                    >
+                      {heading}
+                    </Box>
+                    <Box color='gray.700'>
+                      {val[0]}
+                    </Box>
+                  </Box>
+                </Box>
               )
             })
           }
-        </List>
-      </VStack>
-      <VStack align='center' m="12">
-        <List spacing={5}>
-          {
-            POINTERS.map((point, index) => {
-              return (
-                <ListItem key={index} fontSize='lg'>
-                  <ListIcon as={TiTick} color='pink.400' />
-                  {point}
-                </ListItem>
-              )
-            })
-          }
-        </List>
-      </VStack>
-      <Speakers />
+        </SimpleGrid>
+        <Speakers />
+      </Box>
       <VStack m='8'>
         <Heading>Who should attend??</Heading>
       </VStack>
       <VStack m='16' spacing='14'>
         <Heading>What you will learn</Heading>
         <Learnings />
+        <RegisterBtn size='lg' fontSize="lg" />
       </VStack>
       <Flex align='center' direction='column' justify='center' mt='24' pt='16' bgColor='white' color='black' w='full'>
-        <Heading>Tickets</Heading>
-        {/* <Box borderRadius='xl' bgColor='pink.300' p='4'>
-          <HStack>
-            <Heading>Buy your tickets </Heading>
-            <Link href="https://rzp.io/l/YIF22" passHref>
-              <a target='_blank' rel="noopener">here.</a>
-            </Link>
-          </HStack>
-        </Box> */}
+        <Heading>Why to Exhibit?</Heading>
       </Flex>
     </main >
   );
@@ -218,9 +238,9 @@ const Speakers = () => {
   );
 
   return (
-    <VStack bgColor='white' p='16' color='black' spacing='6'>
+    <VStack bgColor='white' p='16' color='black' spacing='10'>
       <Heading as='h1' fontSize='3xl'>Speakers</Heading>
-      <SimpleGrid columns={{ sm: 2, md: 3 }} spacing='6' m='4'>
+      <SimpleGrid columns={{ sm: 1, lg: 3 }} spacing='6' m='4'>
         {
           Object.entries(HIGHLIGHTS).map(([key, value], index) => {
             return (
@@ -230,7 +250,7 @@ const Speakers = () => {
                 key={index}
                 whileHover={{ scale: 1.1 }}
               >
-                <Box ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                <Box ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' borderColor="pink.200">
                   <Image src="https://bit.ly/dan-abramov" fallbackSrc="/utb-dark.png" alt="Dummy image" />
                   <Box p='6'>
                     <VStack>

@@ -41,14 +41,14 @@ export default function Navbar() {
         <Flex
           flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", md: 'none' }}
         >
           <IconButton
             onClick={onToggle}
             icon={
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
             }
-            variant={"ghost"}
+            variant={"solid"}
             aria-label={"Toggle Navigation"}
           />
         </Flex>
@@ -61,7 +61,7 @@ export default function Navbar() {
             Logo
           </Text>
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
@@ -97,7 +97,7 @@ export const RegisterBtn = ({ size = 'sm', fontSize = 'sm' }: RegisterBtnProps) 
         fontWeight={600}
         color={"white"}
         bg={"pink.400"}
-        href="/"
+        href="https://rzp.io/l/YIF22"
         _hover={{
           bg: "pink.300",
         }}
@@ -110,8 +110,9 @@ export const RegisterBtn = ({ size = 'sm', fontSize = 'sm' }: RegisterBtnProps) 
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
+  const linkHoverColor = useColorModeValue("pink.300", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -131,7 +132,17 @@ const DesktopNav = () => {
                 }}
               >
                 {navItem.label}
+                {navItem.children && (
+                  <Icon
+                    as={ChevronDownIcon}
+                    transition={"all .25s ease-in-out"}
+                    transform={isOpen ? "rotate(180deg)" : ""}
+                    w={6}
+                    h={6}
+                  />
+                )}
               </Link>
+
             </PopoverTrigger>
 
             {navItem.children && (
@@ -234,6 +245,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
             as={ChevronDownIcon}
             transition={"all .25s ease-in-out"}
             transform={isOpen ? "rotate(180deg)" : ""}
+            color='gray.600'
             w={6}
             h={6}
           />
@@ -248,6 +260,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           borderStyle={"solid"}
           borderColor={useColorModeValue("gray.200", "gray.700")}
           align={"start"}
+          color='gray.600'
         >
           {children &&
             children.map((child) => (
@@ -270,7 +283,7 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "About",
+    label: "About Us",
     children: [
       {
         label: "Objectives",
@@ -289,6 +302,22 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Sponsors",
     href: "#",
+  },
+  {
+    label: "Partners",
+    href: "#"
+  },
+  {
+    label: "Agenda",
+    href: "#"
+  },
+  {
+    label: "Floor Plan",
+    href: "#"
+  },
+  {
+    label: "Become Sponsors",
+    href: "#"
   },
   {
     label: "FAQs",
