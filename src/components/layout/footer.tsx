@@ -57,7 +57,7 @@ export default function Footer() {
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
     >
-      <Container as={Stack} maxW={"6xl"} py={10}>
+      {/* <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
@@ -82,10 +82,10 @@ export default function Footer() {
             <Link href={"#"}>Law Enforcement</Link>
           </Stack>
 
-          {/* <Stack align={'flex-start'}>
-          </Stack> */}
+          <Stack align={'flex-start'}>
+          </Stack>
         </SimpleGrid>
-      </Container>
+      </Container> */}
 
       <Box
         borderTopWidth={1}
@@ -106,13 +106,13 @@ export default function Footer() {
             reserved
           </Text>
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Twitter"} href={"#"}>
+            <SocialButton label={"Twitter"} href={"https://twitter.com/YIF2022?t=0gwED1PXazhJ9lzhnE1mhw&s=08"}>
               <FaTwitter />
             </SocialButton>
-            <SocialButton label={"YouTube"} href={"#"}>
+            {/* <SocialButton label={"YouTube"} href={"#"}>
               <FaYoutube />
-            </SocialButton>
-            <SocialButton label={"Instagram"} href={"#"}>
+            </SocialButton> */}
+            <SocialButton label={"Instagram"} href={"https://instagram.com/theyif2022?igshid=YmMyMTA2M2Y="}>
               <FaInstagram />
             </SocialButton>
           </Stack>

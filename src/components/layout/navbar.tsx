@@ -264,7 +264,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link py={2} key={child.label} href={child.href}>
                 {child.label}
               </Link>
             ))}
@@ -287,21 +287,21 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: "Objectives",
-        href: "#",
+        href: "#objectives",
       },
       {
         label: "Key Higlights",
-        href: "#",
+        href: "#key-highlights",
       },
     ],
   },
   {
     label: "Speakers",
-    href: "#",
+    href: "#speakers",
   },
   {
     label: "Sponsors",
-    href: "#",
+    href: "#sponsors",
   },
   {
     label: "Partners",
@@ -317,24 +317,24 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Become Sponsors",
-    href: "#"
+    href: "https://tdfmwps0bhv.typeform.com/to/MbEg8rcp"
   },
   {
     label: "FAQs",
     children: [
       {
         label: "General FAQs",
-        href: "#",
+        href: "#General",
       },
       {
         label: "Ticket FAQs",
-        href: "#",
+        href: "#Tickets",
       },
       {
         label: "Sponsorship FAQs",
-        href: "#",
+        href: "#Sponsorship",
       },
     ],
-    href: "#",
+    href: "#faq",
   },
 ];

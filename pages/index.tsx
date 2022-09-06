@@ -1,4 +1,4 @@
-import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon, Center, Stack } from "@chakra-ui/react";
+import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon, Center, Stack, useDisclosure, IconButton, Collapse } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { ImLocation2 } from 'react-icons/im'
 import { BsFillCalendarCheckFill } from 'react-icons/bs'
@@ -10,13 +10,26 @@ import { SiDiscover } from 'react-icons/si'
 import { MdLeaderboard } from 'react-icons/md'
 import { FaBuromobelexperte } from 'react-icons/fa'
 import { IoGitNetworkSharp } from 'react-icons/io5'
-import Link from "next/link";
+import { motion } from 'framer-motion'
+import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const HIGHLIGHTS = {
   'PARTICIPANTS': '3K+',
   'SPEAKERS': '25+',
   'EXHIBITIONS & PARTNERS': '20+'
 }
+
+const EXHIBITION = [
+  'Academia Industry Connect- As practical knowledge outweighs theoretical knowledge. Keeping this in mind, we are offering the youth a chance to hear from various industry experts, founders and influential figures about their challenges and experiences.',
+  'Discover latest developments in the field of Technology',
+  'Find out what you need to do to start your leadership path.',
+  'Surround yourself with experts',
+  'Networking- Grow and expand your business',
+  'Growing demand within Industry 4.0',
+  'Enclose sustainability and trust in Technology',
+  'Meet and Engage with 3000+ participants',
+  'Brand Visibility',
+]
 
 const POINTS = ['Footfall of 3,000+ participants', '2️5& counting - Indian speakers, celebrities, and influencers',
   '2️5+ Corporate exhibitions & partners',
@@ -127,8 +140,8 @@ const Home: NextPage = () => {
         </List> */}
       </VStack>
       <Box bgColor='white' m='12' borderRadius='lg' p='12'>
-        <HStack p="8" spacing='24' align='space-between'>
-          <Heading color='gray.800'>About the Summit</Heading>
+        <Flex p="8" direction={{ base: 'column', lg: 'row' }} align={{ base: 'center', lg: 'space-between' }} justify={{ base: 'space-between' }}>
+          <Heading color='gray.800' mb={{ base: '4' }}>About the Summit</Heading>
           <VStack align='flex-end'>
             <List spacing={3}>
               {
@@ -143,7 +156,7 @@ const Home: NextPage = () => {
               }
             </List>
           </VStack>
-        </HStack>
+        </Flex>
         <SimpleGrid columns={{ base: 1, lg: 3 }} spacing='4' m={8}>
           {
             Object.entries(CARDS).map(([heading, val], index) => {
@@ -184,7 +197,38 @@ const Home: NextPage = () => {
       </VStack>
       <Flex align='center' direction='column' justify='center' mt='24' pt='16' bgColor='white' color='black' w='full'>
         <Heading>Why to Exhibit?</Heading>
+        <Box p={12} borderRadius='xl' m='12' bgColor='gray.800' boxShadow='lg' color='whiteAlpha.100'>
+          <Flex direction={{ base: 'column', lg: 'row' }} align={{ sm: 'center', lg: 'space-between' }} justify={{ lg: "space-between" }}>
+            <Image as={motion.img}
+              src='/exhibition.jpg'
+              alt="Exhibition Image"
+              w={{ base: '250px', lg: '400px' }}
+              h={{ base: '300px', lg: '400px' }}
+              initial='hidden'
+              whileInView={{
+                scale: [1, 2, 2, 1, 1],
+                rotate: [0, 0, 270, 270, 0],
+                borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+              }}
+            />
+            <VStack>
+              <List spacing={4} m='8'>
+                {
+                  EXHIBITION.map((point, index) => {
+                    return (
+                      <ListItem key={index} fontSize='lg' color='white'>
+                        <ListIcon as={TiTick} color='pink.400' />
+                        {point}
+                      </ListItem>
+                    )
+                  })
+                }
+              </List>
+            </VStack>
+          </Flex>
+        </Box>
       </Flex>
+      <FAQ />
     </main >
   );
 };
@@ -238,7 +282,7 @@ const Speakers = () => {
   );
 
   return (
-    <VStack bgColor='white' p='16' color='black' spacing='10'>
+    <VStack id='#speakers' bgColor='white' p='16' color='black' spacing='10'>
       <Heading as='h1' fontSize='3xl'>Speakers</Heading>
       <SimpleGrid columns={{ sm: 1, lg: 3 }} spacing='6' m='4'>
         {
@@ -251,12 +295,12 @@ const Speakers = () => {
                 whileHover={{ scale: 1.1 }}
               >
                 <Box ref={ref} maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' borderColor="pink.200">
-                  <Image src="https://bit.ly/dan-abramov" fallbackSrc="/utb-dark.png" alt="Dummy image" />
+                  <Image src="" fallbackSrc="/fallback.png" alt="Speaker's image" />
                   <Box p='6'>
                     <VStack>
-                      <Text fontWeight='bold'>Aman Gupta</Text>
-                      <Text>CoFounder</Text>
-                      <Text color='pink.400'>boat</Text>
+                      <Text fontWeight='bold'>TBD</Text>
+                      <Text>TBD</Text>
+                      <Text color='pink.400'>TBD</Text>
                     </VStack>
                   </Box>
                 </Box>
@@ -266,6 +310,75 @@ const Speakers = () => {
         }
       </SimpleGrid>
     </VStack>
+  )
+}
+
+const ticket = {
+  'How can I purchase the ticket?': 'Tickets can be purchased from our website.',
+  'Can I transfer my ticket to another person?': 'No, the ticket is non- transferable',
+  'Can I get a refund if not able to attend?': 'The ticket is non-refundable'
+}
+
+const sponsorship = {
+  'How to become a sponsor?':
+    'You can fill up the form to become a sponsor for the event.',
+  'What types of sponsorships are available?':
+    'You can choose Diamond sponsorship, Gold sponsorship, Silver sponsorship and Bronze sponsorship.',
+}
+
+const general = {
+  'What is Youth Innovation Forum?':
+    'Youth Innovation Forum is nextgen movement that inspires youth to become job creators and engage with policy makers and industry experts with discrete discussions on Web3, Industry 4.0, Blockchain, 5G and IOT.',
+  'Where will YIF take place?':
+    'YIF will take place in Ahmedabad and will also be broadcasted virtually.',
+  'How to register yourself for the event?':
+    'Once you get to the YIF website, log in and you will receive your login credentials prior to the event.',
+  'When will more details be available on the event?':
+    'We are continuously updating the website to provide more details to the attendees and furthermore we will be sending the mail to the registered users’ inbox.',
+  'Will the sessions run simultaneously?':
+    'The YIF has 4 sessions that will run simultaneously.',
+  'Can we chat with the speakers during the event?':
+    'There will be a Q&A session taking place after every session and it will be exclusively for the attendees.',
+  'Do I need to register for the sessions separately?': 'No, you will get access to all the sessions once you register.'
+}
+
+const faqs = {
+  'General': general,
+  'Tickets': ticket,
+  'Sponsorship': sponsorship
+}
+
+const FAQ = () => {
+  return (
+    <Flex id='#faq' m='12' p='8' direction='column' justify='center' align='center' bg='white' boxShadow='md' borderRadius='lg'>
+      <Heading fontSize={{ md: '5xl' }} color='black'>FAQs</Heading>
+      {
+        Object.entries(faqs).map(([heading, faq], index) => {
+          return (
+            <Flex key={index} m='6' direction='column' p='6' w='full'>
+              <Heading id={`#${heading}`} fontSize={{ md: '2xl' }} mb='4' color='pink.600' alignSelf='center'>{heading}</Heading>
+              {
+                Object.entries(faq).map(([question, answer]) => {
+                  const { isOpen, onToggle } = useDisclosure();
+
+                  return (
+                    <Flex w='100%' p='6' justify='space-between' direction='column' borderBottom='1px solid #2D3748'>
+                      <Flex justify='space-between' align='center'>
+                        <Heading fontSize={{ md: 'xl' }} color='gray.700'>{question}</Heading>
+                        <IconButton onClick={onToggle} colorScheme='pink' variant='solid' aria-label='Expand question' icon={isOpen ? <CloseIcon /> : <AddIcon />} />
+                      </Flex>
+                      <Collapse in={isOpen} animateOpacity>
+                        <Text color='pink.400' fontSize={{ md: 'xl' }}>{answer}</Text>
+                      </Collapse>
+                    </Flex>
+                  )
+                })
+              }
+            </Flex>
+          )
+        })
+      }
+    </Flex>
   )
 }
 
