@@ -141,7 +141,7 @@ const Home: NextPage = () => {
       </VStack>
       <Box bgColor='white' m='12' borderRadius='lg' p='12'>
         <Flex p="8" direction={{ base: 'column', lg: 'row' }} align={{ base: 'center', lg: 'space-between' }} justify={{ base: 'space-between' }}>
-          <Heading color='gray.800' mb={{ base: '4' }}>About the Summit</Heading>
+          <Heading id='about-us' color='gray.800' mb={{ base: '4' }}>About the Summit</Heading>
           <VStack align='flex-end'>
             <List spacing={3}>
               {
@@ -157,7 +157,7 @@ const Home: NextPage = () => {
             </List>
           </VStack>
         </Flex>
-        <SimpleGrid columns={{ base: 1, lg: 3 }} spacing='4' m={8}>
+        <SimpleGrid id='key-highlights' columns={{ base: 1, lg: 3 }} spacing='4' m={8}>
           {
             Object.entries(CARDS).map(([heading, val], index) => {
               return (
@@ -282,7 +282,7 @@ const Speakers = () => {
   );
 
   return (
-    <VStack id='#speakers' bgColor='white' p='16' color='black' spacing='10'>
+    <VStack id='speakers' bgColor='white' p='16' color='black' spacing='10'>
       <Heading as='h1' fontSize='3xl'>Speakers</Heading>
       <SimpleGrid columns={{ sm: 1, lg: 3 }} spacing='6' m='4'>
         {
@@ -350,13 +350,13 @@ const faqs = {
 
 const FAQ = () => {
   return (
-    <Flex id='#faq' m='12' p='8' direction='column' justify='center' align='center' bg='white' boxShadow='md' borderRadius='lg'>
+    <Flex id='faq' m='12' p='8' direction='column' justify='center' align='center' bg='white' boxShadow='md' borderRadius='lg'>
       <Heading fontSize={{ md: '5xl' }} color='black'>FAQs</Heading>
       {
         Object.entries(faqs).map(([heading, faq], index) => {
           return (
             <Flex key={index} m='6' direction='column' p='6' w='full'>
-              <Heading id={`#${heading}`} fontSize={{ md: '2xl' }} mb='4' color='pink.600' alignSelf='center'>{heading}</Heading>
+              <Heading id={`${heading}`} fontSize={{ md: '2xl' }} mb='4' color='pink.600' alignSelf='center'>{heading}</Heading>
               {
                 Object.entries(faq).map(([question, answer]) => {
                   const { isOpen, onToggle } = useDisclosure();

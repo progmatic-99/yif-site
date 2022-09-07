@@ -142,7 +142,6 @@ const DesktopNav = () => {
                   />
                 )}
               </Link>
-
             </PopoverTrigger>
 
             {navItem.children && (
@@ -294,6 +293,7 @@ const NAV_ITEMS: Array<NavItem> = [
         href: "#key-highlights",
       },
     ],
+    href: '#about-us'
   },
   {
     label: "Speakers",
