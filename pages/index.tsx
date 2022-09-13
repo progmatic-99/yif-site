@@ -1,4 +1,4 @@
-import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon, Center, Stack, useDisclosure, IconButton, Collapse } from "@chakra-ui/react";
+import { Image, Heading, HStack, Text, VStack, Flex, Box, SimpleGrid, List, ListItem, ListIcon, ScaleFade, Icon, Center, Stack, useDisclosure, IconButton, Collapse, Button } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { ImLocation2 } from 'react-icons/im'
 import { BsFillCalendarCheckFill } from 'react-icons/bs'
@@ -18,6 +18,19 @@ const HIGHLIGHTS = {
   'SPEAKERS': '25+',
   'EXHIBITIONS & PARTNERS': '20+'
 }
+
+const ATTENDEES = [
+  'University Students',
+  'Investors',
+  'Founders',
+  'Entrepreneurs',
+  'Influencers',
+  'Government Officials',
+  'Creators',
+  'Brands',
+  'Agencies',
+  'E-Commerce brands'
+]
 
 const EXHIBITION = [
   'Academia Industry Connect- As practical knowledge outweighs theoretical knowledge. Keeping this in mind, we are offering the youth a chance to hear from various industry experts, founders and influential figures about their challenges and experiences.',
@@ -51,28 +64,6 @@ const CARDS = {
   'Awards': ['Witness magnificent award nights.', '/awards.jpeg']
 }
 
-// const POINTERS = ['AIC: Renowned brands showcasing their products and services and promoting innovation and growth',
-//    'Conference: Prominent speakers delivering useful insights to 3000+ participants',
-//    'Awards: Witness magnificent awards night'
-// ]
-
-/*
-type IconName = 'SiDiscover' | 'MdLeaderboard' | 'FaBuromobelexperte' | 'IoGitNetworkSharp';
-
-const PTS: Record<IconName, string> = {
-  SiDiscover: 'Unique Speakers',
-  MdLeaderboard: 'Leadership Path',
-  FaBuromobelexperte: 'Expert Advice',
-  IoGitNetworkSharp: 'Networking'
-}
-
-const LEARNING_POINTS = {
-  'Unique Speakers': 'SiDiscover',
-  'Leadership Path': 'MdLeaderboard',
-  'Expert Advice': 'FaBuromobelexperte',
-  'Networking': 'IoGitNetworkSharp'
-}
-*/
 const Home: NextPage = () => {
   return (
     <main>
@@ -80,13 +71,7 @@ const Home: NextPage = () => {
         <Image src='/yif-2.png' w='100%' h='100%' alt='YIF banner' />
       </Box>
       <VStack spacing={4} m={8}>
-        {/* <Heading as="h4" fontSize={{ lg: '3xl', md: '2xl', sm: 'xl' }} color='pink.100'>
-          Building India’s Tomorrow
-        </Heading> */}
         <Heading as="h1" fontSize={{ lg: '6xl', md: '4xl', base: '2xl' }}>Youth Innovation Forum 2022</Heading>
-        {/* <Heading as="h4" fontSize={{ lg: '3xl', md: '2xl', sm: 'xl' }} color='pink.100'>
-          Decentralizing India
-        </Heading> */}
         <HStack bgColor="whiteAlpha.300" spacing="6" p='2' borderRadius='sm'>
           <HStack>
             <ImLocation2 />
@@ -125,20 +110,6 @@ const Home: NextPage = () => {
           }
         </SimpleGrid>
       </Flex>
-      <VStack align='center' m="8">
-        {/* <List spacing={3}>
-          {
-            POINTS.map((point, index) => {
-              return (
-                <ListItem key={index} fontSize='lg'>
-                  <ListIcon as={TiTick} color='pink.400' />
-                  {point}
-                </ListItem>
-              )
-            })
-          }
-        </List> */}
-      </VStack>
       <Box bgColor='white' m='12' borderRadius='lg' p='12'>
         <Flex p="8" direction={{ base: 'column', lg: 'row' }} align={{ base: 'center', lg: 'space-between' }} justify={{ base: 'space-between' }}>
           <Heading id='about-us' color='gray.800' mb={{ base: '4' }}>About the Summit</Heading>
@@ -187,8 +158,33 @@ const Home: NextPage = () => {
         </SimpleGrid>
         <Speakers />
       </Box>
-      <VStack m='8'>
+      <VStack m='8' spacing='8'>
         <Heading>Who should attend??</Heading>
+        <Box bg='pink.50' p='12' borderRadius='3xl' sx={{ overflow: "hidden" }}>
+          <VStack sx={{ animation: "to-left 1s" }}>
+            {
+              ATTENDEES.map((attendee, index) => {
+                return (
+                  <Button
+                    m='4'
+                    p='2'
+                    borderRadius='xl'
+                    colorScheme='pink'
+                    key={index}
+                    variant='outline'
+                    as={motion.button}
+                    initial={{ opacity: 0, x: 0 }}
+                    animate={{
+                      opacity: 1,
+                      x: -60,
+                      transition: { delay: 1 }
+                    }}
+                  >{attendee}</Button>
+                )
+              })
+            }
+          </VStack>
+        </Box>
       </VStack>
       <VStack m='16' spacing='14'>
         <Heading>What you will learn</Heading>
@@ -284,7 +280,7 @@ const Speakers = () => {
   return (
     <VStack id='speakers' bgColor='white' p='16' color='black' spacing='10'>
       <Heading as='h1' fontSize='3xl'>Speakers</Heading>
-      <SimpleGrid columns={{ sm: 1, lg: 3 }} spacing='6' m='4'>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing='6' m='4'>
         {
           Object.entries(HIGHLIGHTS).map(([key, value], index) => {
             return (
@@ -358,11 +354,11 @@ const FAQ = () => {
             <Flex key={index} m='6' direction='column' p='6' w='full'>
               <Heading id={`${heading}`} fontSize={{ md: '2xl' }} mb='4' color='pink.600' alignSelf='center'>{heading}</Heading>
               {
-                Object.entries(faq).map(([question, answer]) => {
+                Object.entries(faq).map(([question, answer], index) => {
                   const { isOpen, onToggle } = useDisclosure();
 
                   return (
-                    <Flex w='100%' p='6' justify='space-between' direction='column' borderBottom='1px solid #2D3748'>
+                    <Flex w='100%' p='6' key={index} justify='space-between' direction='column' borderBottom='1px solid #2D3748'>
                       <Flex justify='space-between' align='center'>
                         <Heading fontSize={{ md: 'xl' }} color='gray.700'>{question}</Heading>
                         <IconButton onClick={onToggle} colorScheme='pink' variant='solid' aria-label='Expand question' icon={isOpen ? <CloseIcon /> : <AddIcon />} />

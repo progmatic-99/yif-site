@@ -14,6 +14,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -53,13 +54,7 @@ export default function Navbar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
+          <Image src="/yif-logo.png" w='40px' h='40px' alt='YIF 2022 logo' />
 
           <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
@@ -115,7 +110,7 @@ const DesktopNav = () => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} alignItems='center' spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>

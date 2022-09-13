@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
-        <link rel='YIF logo' href="" />
+        <link rel="icon" type="image/x-icon" href="/yif-favico.png" />
         <title>YIF 2022</title>
       </Head>
       <motion.div style={{ scaleX: scrollYProgress, background: '#ED64A6', top: 0, left: 0, right: 0, height: '5px', transformOrigin: '0%', position: 'fixed' }} />
